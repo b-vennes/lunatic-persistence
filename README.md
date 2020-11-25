@@ -12,7 +12,7 @@ Override nightly for project: `rustup override set nightly`
 
 `cargo build --target=wasm32-wasi`
 
-or `cargo build --target`
+or `cargo build --release --target=wasm32-wasi` for an optimized bundle.
 
 ## Example
 
