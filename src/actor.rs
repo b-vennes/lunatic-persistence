@@ -1,11 +1,11 @@
 use super::storage;
-use super::effect::CommandEffect;
+use super::effect::Effect;
 
 use lunatic::{Channel, Process};
 use serde::{Serialize, Deserialize};
 
 pub trait PersistenceActor<TCommand, TEvent, TState, TResponse> {
-    fn handle_command(state: &Option<TState>, command: TCommand) -> Result<CommandEffect<TEvent, TResponse>, String>;
+    fn handle_command(state: &Option<TState>, command: TCommand) -> Result<Effect<TEvent, TResponse>, String>;
 
     fn handle_event(state: Option<TState>, event: &TEvent) -> Option<TState>;
 }

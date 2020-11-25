@@ -1,5 +1,5 @@
 use lunatic_persistence::actor::{PersistenceActor, send_command};
-use lunatic_persistence::effect::CommandEffect;
+use lunatic_persistence::effect::Effect;
 use lunatic_persistence::storage::{Storage, GetStateResult};
 
 use lunatic::Channel;
@@ -18,13 +18,13 @@ struct SumPersistenceActor {}
 
 impl PersistenceActor<Command, Event, State, String> for SumPersistenceActor {
 
-    fn handle_command(_state: &Option<State>, command: Command) -> Result<CommandEffect<Event, String>, String> {
+    fn handle_command(_state: &Option<State>, command: Command) -> Result<Effect<Event, String>, String> {
         let effect = match command {
             Command::Add(v) =>
-                CommandEffect::publish(Event::Added(v))
+                Effect::publish(Event::Added(v))
                     .then_reply(format!("added {}", v)),
             Command::Subtract(v) =>
-                CommandEffect::publish(Event::Subtracted(v))
+                Effect::publish(Event::Subtracted(v))
                     .then_reply(format!("subtracted {}", v))
         };
 

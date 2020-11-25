@@ -1,11 +1,11 @@
-pub struct CommandEffect<TEvent, TResponse> {
+pub struct Effect<TEvent, TResponse> {
     pub events: Vec<TEvent>,
     pub response: Option<TResponse>,
 }
 
-impl<TEvent, TResponse> CommandEffect<TEvent, TResponse> {
+impl<TEvent, TResponse> Effect<TEvent, TResponse> {
     pub fn publish(event: TEvent) -> Self {
-        CommandEffect {
+        Effect {
             events: vec!(event),
             response: None
         }
@@ -18,7 +18,7 @@ impl<TEvent, TResponse> CommandEffect<TEvent, TResponse> {
     }
 
     pub fn then_reply(self, response: TResponse) -> Self {
-        CommandEffect {
+        Effect {
             events: self.events,
             response: Some(response)
         }
